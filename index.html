@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Bella's Kitchen</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Family sandwich ordering — taking orders, made fresh">
+
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#e63946">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Bella's Kitchen">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="icon" href="icon-192.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --tomato: #e63946;
+    --cream: #fdf6e3;
+    --charcoal: #3d2817;
+    --charcoal-soft: #5a3d27;
+    --shadow: 0 2px 0 var(--charcoal);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: var(--cream);
+    color: var(--charcoal);
+    min-height: 100vh;
+    padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
+    -webkit-tap-highlight-color: transparent;
+  }
+  header {
+    background: var(--tomato);
+    color: var(--cream);
+    padding: 24px 20px 20px;
+    border-bottom: 4px solid var(--charcoal);
+    text-align: center;
+  }
+  .brand {
+    font-family: 'Bungee', sans-serif;
+    font-size: 44px;
+    letter-spacing: 1px;
+    line-height: 1;
+    margin: 0;
+  }
+  .tagline {
+    font-size: 14px;
+    margin: 8px 0 0;
+    opacity: 0.92;
+    font-weight: 500;
+  }
+  main { padding: 16px; max-width: 560px; margin: 0 auto; }
+  h2 {
+    font-family: 'Bungee', sans-serif;
+    font-size: 22px;
+    margin: 24px 0 12px;
+    color: var(--charcoal);
+    letter-spacing: 0.5px;
+  }
+  .item {
+    background: #fff;
+    border: 2px solid var(--charcoal);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: var(--shadow);
+  }
+  .item-info { flex: 1; min-width: 0; }
+  .item-name { font-weight: 700; font-size: 16px; }
+  .item-desc { font-size: 13px; color: var(--charcoal-soft); margin-top: 2px; }
+  .item-price { font-weight: 700; font-size: 16px; margin-right: 8px; white-space: nowrap; }
+  .qty {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .qty button {
+    width: 34px; height: 34px;
+    border: 2px solid var(--charcoal);
+    background: var(--cream);
+    color: var(--charcoal);
+    font-size: 20px;
+    font-weight: 700;
+    border-radius: 8px;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0;
+  }
+  .qty button:active { transform: translateY(1px); }
+  .qty span { min-width: 22px; text-align: center; font-weight: 700; }
+
+  label { display: block; font-weight: 700; font-size: 14px; margin: 14px 0 6px; }
+  input, textarea {
+    width: 100%;
+    font: inherit;
+    color: var(--charcoal);
+    background: #fff;
+    border: 2px solid var(--charcoal);
+    border-radius: 10px;
+    padding: 12px 14px;
+    box-shadow: var(--shadow);
+  }
+  textarea { min-height: 70px; resize: vertical; }
+
+  .summary {
+    background: #fff;
+    border: 2px solid var(--charcoal);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-top: 12px;
+    box-shadow: var(--shadow);
+  }
+  .summary .row { display: flex; justify-content: space-between; padding: 4px 0; font-size: 15px; }
+  .summary .total { font-weight: 700; font-size: 18px; border-top: 2px dashed var(--charcoal); padding-top: 8px; margin-top: 6px; }
+
+  .order-btn {
+    display: block;
+    width: 100%;
+    margin: 20px 0 8px;
+    padding: 18px;
+    font-family: 'Bungee', sans-serif;
+    font-size: 20px;
+    letter-spacing: 1px;
+    background: var(--tomato);
+    color: var(--cream);
+    border: 3px solid var(--charcoal);
+    border-radius: 14px;
+    box-shadow: 0 4px 0 var(--charcoal);
+    cursor: pointer;
+  }
+  .order-btn:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--charcoal); }
+  .order-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .toast {
+    position: fixed;
+    left: 50%; bottom: 24px;
+    transform: translateX(-50%) translateY(120%);
+    background: var(--charcoal);
+    color: var(--cream);
+    padding: 12px 18px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(0,0,0,.25);
+    transition: transform .25s ease;
+    z-index: 50;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  footer {
+    text-align: center;
+    color: var(--charcoal-soft);
+    font-size: 12px;
+    padding: 20px 16px 28px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1 class="brand">BELLA'S KITCHEN</h1>
+  <p class="tagline">Family sandwich ordering — taking orders, made fresh</p>
+</header>
+
+<main>
+  <h2>Menu</h2>
+  <div id="menu"></div>
+
+  <h2>Your Info</h2>
+  <label for="name">Name</label>
+  <input id="name" type="text" autocomplete="name" placeholder="Your name">
+
+  <label for="pickup">Pickup time</label>
+  <input id="pickup" type="text" placeholder="e.g. 12:30pm today">
+
+  <label for="notes">Notes (optional)</label>
+  <textarea id="notes" placeholder="Allergies, extras, anything else"></textarea>
+
+  <h2>Order Summary</h2>
+  <div class="summary" id="summary">
+    <div class="row"><span>No items yet</span><span></span></div>
+  </div>
+
+  <button class="order-btn" id="order-btn" disabled>SEND ORDER</button>
+</main>
+
+<footer>
+  Made with love for Bella's Kitchen
+</footer>
+
+<div class="toast" id="toast">Order text copied!</div>
+
+<script>
+  const PHONE = '+14434149778';
+
+  const MENU = [
+    { id: 'ham',     name: 'Ham & Cheese',       desc: 'Honey ham, cheddar, lettuce', price: 5 },
+    { id: 'turkey',  name: 'Turkey Club',        desc: 'Turkey, bacon, tomato, mayo', price: 6 },
+    { id: 'pbj',     name: 'Classic PB&J',       desc: 'Peanut butter & grape jelly', price: 3 },
+    { id: 'grilled', name: 'Grilled Cheese',     desc: 'Toasted sourdough, cheddar',  price: 4 },
+    { id: 'veggie',  name: 'Garden Veggie',      desc: 'Cucumber, tomato, hummus',    price: 5 },
+    { id: 'chips',   name: 'Side of Chips',      desc: 'Kettle cooked, lightly salted', price: 2 },
+    { id: 'drink',   name: 'Lemonade',           desc: 'Fresh squeezed',              price: 2 },
+  ];
+
+  const qty = Object.fromEntries(MENU.map(m => [m.id, 0]));
+
+  const menuEl = document.getElementById('menu');
+  const summaryEl = document.getElementById('summary');
+  const orderBtn = document.getElementById('order-btn');
+  const nameEl = document.getElementById('name');
+  const pickupEl = document.getElementById('pickup');
+  const notesEl = document.getElementById('notes');
+  const toast = document.getElementById('toast');
+
+  function fmt(n) { return '$' + n.toFixed(2); }
+
+  function render() {
+    menuEl.innerHTML = MENU.map(m => `
+      <div class="item">
+        <div class="item-info">
+          <div class="item-name">${m.name}</div>
+          <div class="item-desc">${m.desc}</div>
+        </div>
+        <div class="item-price">${fmt(m.price)}</div>
+        <div class="qty">
+          <button aria-label="Remove one ${m.name}" data-act="dec" data-id="${m.id}">−</button>
+          <span id="q-${m.id}">${qty[m.id]}</span>
+          <button aria-label="Add one ${m.name}" data-act="inc" data-id="${m.id}">+</button>
+        </div>
+      </div>
+    `).join('');
+
+    const lines = MENU.filter(m => qty[m.id] > 0);
+    if (lines.length === 0) {
+      summaryEl.innerHTML = `<div class="row"><span>No items yet</span><span></span></div>`;
+      orderBtn.disabled = true;
+    } else {
+      const total = lines.reduce((s, m) => s + m.price * qty[m.id], 0);
+      summaryEl.innerHTML = lines.map(m => `
+        <div class="row"><span>${qty[m.id]} × ${m.name}</span><span>${fmt(m.price * qty[m.id])}</span></div>
+      `).join('') + `<div class="row total"><span>Total</span><span>${fmt(total)}</span></div>`;
+      orderBtn.disabled = false;
+    }
+  }
+
+  menuEl.addEventListener('click', e => {
+    const btn = e.target.closest('button[data-id]');
+    if (!btn) return;
+    const id = btn.dataset.id;
+    qty[id] = Math.max(0, qty[id] + (btn.dataset.act === 'inc' ? 1 : -1));
+    render();
+  });
+
+  function buildMessage() {
+    const lines = MENU.filter(m => qty[m.id] > 0)
+      .map(m => `  ${qty[m.id]} × ${m.name} (${fmt(m.price * qty[m.id])})`);
+    const total = MENU.reduce((s, m) => s + m.price * qty[m.id], 0);
+    const parts = [
+      `Bella's Kitchen order:`,
+      ...lines,
+      `Total: ${fmt(total)}`,
+    ];
+    if (nameEl.value.trim()) parts.push(`Name: ${nameEl.value.trim()}`);
+    if (pickupEl.value.trim()) parts.push(`Pickup: ${pickupEl.value.trim()}`);
+    if (notesEl.value.trim()) parts.push(`Notes: ${notesEl.value.trim()}`);
+    return parts.join('\n');
+  }
+
+  function showToast(msg) {
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(showToast._t);
+    showToast._t = setTimeout(() => toast.classList.remove('show'), 2200);
+  }
+
+  async function copy(text) {
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return true;
+      }
+    } catch (e) { /* fall through */ }
+    try {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      const ok = document.execCommand('copy');
+      document.body.removeChild(ta);
+      return ok;
+    } catch (e) { return false; }
+  }
+
+  orderBtn.addEventListener('click', async () => {
+    const msg = buildMessage();
+    const copied = await copy(msg);
+    showToast(copied ? 'Order copied! Opening Messages…' : 'Opening Messages…');
+    // small delay so the toast can paint before the OS dialog grabs focus
+    setTimeout(() => {
+      window.location.href = `sms:${PHONE}?&body=${encodeURIComponent(msg)}`;
+    }, 350);
+  });
+
+  render();
+</script>
+
+</body>
+</html>
