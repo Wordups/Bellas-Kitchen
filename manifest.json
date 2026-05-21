@@ -2,23 +2,47 @@
   "name": "Bella's Kitchen",
   "short_name": "Bella's Kitchen",
   "description": "Family sandwich ordering — taking orders, made fresh",
-  "start_url": "./index.html",
+  "start_url": "./app.html",
+  "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#fdf6e3",
   "theme_color": "#e63946",
   "icons": [
     {
-      "src": "icon-192.png",
+      "src": "icons/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "icon-512.png",
+      "src": "icons/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Take an Order",
+      "short_name": "Order",
+      "description": "Order pad with chip menu",
+      "url": "./app.html",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Kitchen Line",
+      "short_name": "Kitchen",
+      "description": "Live ticket line",
+      "url": "./kitchen.html",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "The Crew",
+      "short_name": "Crew",
+      "description": "XP, streaks, badges",
+      "url": "./leaderboard.html",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
     }
   ]
 }

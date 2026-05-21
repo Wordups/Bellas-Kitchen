@@ -1,0 +1,25 @@
+{
+  "appId": "com.takeoff.bellaskitchen",
+  "appName": "Bella's Kitchen",
+  "webDir": ".",
+  "bundledWebRuntime": false,
+  "ios": {
+    "contentInset": "always",
+    "scheme": "Bella's Kitchen"
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 1500,
+      "backgroundColor": "#fdf6e3",
+      "showSpinner": false,
+      "iosSplashResourceName": "Splash"
+    },
+    "StatusBar": {
+      "style": "DARK",
+      "backgroundColor": "#e63946"
+    },
+    "PushNotifications": {
+      "presentationOptions": ["badge", "sound", "alert"]
+    }
+  }
+}

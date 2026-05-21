@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+<title>Bella's Kitchen — Order Up!</title>
+<meta name="description" content="Family sandwich ordering — taking orders, made fresh">
+
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#e63946">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Bella's Kitchen">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" href="icons/icon-192.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Bungee&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="shop-header">
+  <h1>BELLA'S KITCHEN</h1>
+  <div class="tagline">★ TAKING ORDERS · MADE FRESH ★</div>
+</div>
+
+<div class="family-bar" id="familyBar"></div>
+
+<div class="nav-strip">
+  <a href="app.html" class="current">ORDER</a>
+  <a href="kitchen.html">KITCHEN</a>
+  <a href="leaderboard.html">CREW</a>
+</div>
+
+<form class="order-pad" id="orderForm" data-order="001">
+
+  <div class="meal-picker" id="mealPicker"></div>
+
+  <div class="section">
+    <div class="section-title"><span class="icon">👤</span>WHO'S EATING</div>
+    <div class="field">
+      <label>Customer Name</label>
+      <input type="text" id="customer" placeholder="e.g. Dad, Mom, Sis..." required />
+    </div>
+  </div>
+
+  <div id="mealSections"></div>
+
+  <div class="section">
+    <div class="section-title"><span class="icon">📝</span>SPECIAL NOTES</div>
+    <div class="field">
+      <textarea id="notes" placeholder="No crust... extra crispy... cut diagonally..."></textarea>
+    </div>
+  </div>
+
+  <button type="button" class="submit-btn" id="submitBtn">ORDER UP! ✓</button>
+
+  <div class="receipt" id="receipt">
+    <div class="stamp">PAID</div>
+    <h2>★ ORDER TICKET ★</h2>
+    <div id="receiptBody"></div>
+    <div class="receipt-footer">— THANK YOU —</div>
+    <div class="action-row">
+      <button type="button" id="copyBtn">COPY</button>
+      <button type="button" class="share-btn" id="textBtn">TEXT DAD 📱</button>
+      <button type="button" id="newBtn">NEW ORDER</button>
+    </div>
+  </div>
+
+</form>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

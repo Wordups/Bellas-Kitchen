@@ -1,0 +1,13 @@
+# Local config holding Supabase keys (real keys live here; example is committed)
+js/config.js
+
+# Capacitor / Node build artifacts
+node_modules/
+ios/App/Pods/
+ios/App/build/
+ios/App/Podfile.lock
+android/
+
+# OS junk
+.DS_Store
+Thumbs.db

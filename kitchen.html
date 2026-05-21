@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+<title>Bella's Kitchen — Line</title>
+<meta name="description" content="Live kitchen ticket line">
+
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1a1410">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="BK Kitchen">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" href="icons/icon-192.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Bungee&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="kitchen">
+
+<div class="shop-header">
+  <h1>🔥 BELLA'S KITCHEN</h1>
+  <div class="tagline">★ THE LINE ★</div>
+</div>
+
+<div class="family-bar" id="familyBar"></div>
+
+<div class="nav-strip">
+  <a href="app.html">ORDER</a>
+  <a href="kitchen.html" class="current">KITCHEN</a>
+  <a href="leaderboard.html">CREW</a>
+</div>
+
+<div class="kitchen-bar">
+  <span class="pill">PENDING <span class="count" id="cnt-pending">0</span></span>
+  <span class="pill">COOKING <span class="count" id="cnt-cooking">0</span></span>
+  <span class="pill">READY <span class="count" id="cnt-ready">0</span></span>
+</div>
+
+<div class="lane-tabs">
+  <button data-lane="pending" class="active">PENDING</button>
+  <button data-lane="cooking">COOKING</button>
+  <button data-lane="ready">READY</button>
+</div>
+
+<div class="lanes">
+  <div class="lane mobile-active" data-lane="pending">
+    <h3>PENDING</h3>
+    <div class="tickets" id="lane-pending"></div>
+  </div>
+  <div class="lane" data-lane="cooking">
+    <h3>COOKING</h3>
+    <div class="tickets" id="lane-cooking"></div>
+  </div>
+  <div class="lane" data-lane="ready">
+    <h3>READY</h3>
+    <div class="tickets" id="lane-ready"></div>
+  </div>
+</div>
+
+<script type="module" src="js/kitchen.js"></script>
+</body>
+</html>

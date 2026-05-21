@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+<title>Bella's Kitchen — The Crew</title>
+
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#e63946">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="BK Crew">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" href="icons/icon-192.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Bungee&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="shop-header">
+  <h1>THE CREW</h1>
+  <div class="tagline">★ XP · STREAKS · BADGES ★</div>
+</div>
+
+<div class="family-bar" id="familyBar"></div>
+
+<div class="nav-strip">
+  <a href="app.html">ORDER</a>
+  <a href="kitchen.html">KITCHEN</a>
+  <a href="leaderboard.html" class="current">CREW</a>
+</div>
+
+<div class="lb-tabs">
+  <button data-range="week" class="active">THIS WEEK</button>
+  <button data-range="all">ALL TIME</button>
+</div>
+
+<div class="lb-list" id="lbList"></div>
+
+<div class="badges-shelf">
+  <div class="section-title"><span class="icon">🏆</span>BADGES</div>
+  <div class="badges-grid" id="badgesGrid"></div>
+</div>
+
+<script type="module" src="js/leaderboard.js"></script>
+</body>
+</html>
